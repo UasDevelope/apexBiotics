@@ -1,3 +1,6 @@
+import 'package:apexbiotics/data/models/auth/login_request.dart';
+import 'package:dio/dio.dart';
+
 import '../../../ core/errors/exceptions.dart';
 import '../../../ core/network/network_info.dart';
 import '../../../domain/entities/auth/registration_entity.dart';
@@ -41,6 +44,25 @@ class AuthRepositoryImpl implements AuthRepository {
       );
     } on RegistrationException catch (e) {
       throw RegistrationException(e.message);
+    }
+  }
+
+  @override
+  Future<void> login({
+    required String email,
+    required String password,
+  }) async {
+    if (!await networkInfo.isConnected) {
+      throw NetworkException('No internet connection');
+    }
+
+    try {
+      await authApi.login(LoginRequest(email: email, password: password));
+    } on DioException catch (e) {
+      throw ServerException(
+        message: e.response?.data['message'] ?? 'Login failed',
+        statusCode: e.response?.statusCode,
+      );
     }
   }
 }

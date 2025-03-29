@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../ core/constants/color_constant.dart';
 import '../../../routes/app_routes.dart';
-import '../bloc/registration_bloc.dart';
+import '../registrater/registration_bloc.dart';
 
 class RegistrationScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -72,8 +72,9 @@ class RegistrationScreen extends StatelessWidget {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your email';
                         }
-                        if (!RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
-                            .hasMatch(value)) {
+                        if (!RegExp(
+                          r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$',
+                        ).hasMatch(value)) {
                           return 'Please enter a valid email';
                         }
                         return null;
@@ -122,48 +123,48 @@ class RegistrationScreen extends StatelessWidget {
                     if (state.status == RegistrationStatus.failure)
                       Text(
                         state.error,
-                        style: GoogleFonts.poppins(
-                          color: Colors.red,
-                        ),
+                        style: GoogleFonts.poppins(color: Colors.red),
                       ),
                     const SizedBox(height: 16),
                     SizedBox(
                       width: double.infinity,
                       height: 50,
                       child: ElevatedButton(
-                        onPressed: state.status == RegistrationStatus.loading
-                            ? null
-                            : () {
-                          if (_formKey.currentState!.validate()) {
-                            context.read<RegistrationBloc>().add(
-                              RegisterUser(
-                                name: _nameController.text,
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                                passwordConfirmation:
-                                _confirmPasswordController.text,
-                              ),
-                            );
-                          }
-                        },
+                        onPressed:
+                            state.status == RegistrationStatus.loading
+                                ? null
+                                : () {
+                                  if (_formKey.currentState!.validate()) {
+                                    context.read<RegistrationBloc>().add(
+                                      RegisterUser(
+                                        name: _nameController.text,
+                                        email: _emailController.text,
+                                        password: _passwordController.text,
+                                        passwordConfirmation:
+                                            _confirmPasswordController.text,
+                                      ),
+                                    );
+                                  }
+                                },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: ColorConstant.primaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        child: state.status == RegistrationStatus.loading
-                            ? const CircularProgressIndicator(
-                          color: Colors.white,
-                        )
-                            : Text(
-                          'Register',
-                          style: GoogleFonts.poppins(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                          ),
-                        ),
+                        child:
+                            state.status == RegistrationStatus.loading
+                                ? const CircularProgressIndicator(
+                                  color: Colors.white,
+                                )
+                                : Text(
+                                  'Register',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                  ),
+                                ),
                       ),
                     ),
                   ],

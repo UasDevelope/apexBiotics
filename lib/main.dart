@@ -1,17 +1,12 @@
-import 'package:apexbiotics/routes/app_routes.dart';
-import 'package:apexbiotics/routes/route_generator.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'injection_container.dart' as di;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'injection_container.dart' as di;
+import 'routes/app_routes.dart';
 import 'routes/route_generator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await di.init();
+  await di.init(); // Initialize dependencies
   runApp(const MyApp());
 }
 
