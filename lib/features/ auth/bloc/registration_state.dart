@@ -13,6 +13,19 @@ class RegistrationState extends Equatable {
     this.error = '',
   });
 
+  // Add copyWith method
+  RegistrationState copyWith({
+    RegistrationStatus? status,
+    RegistrationEntity? registration,
+    String? error,
+  }) {
+    return RegistrationState(
+      status: status ?? this.status,
+      registration: registration ?? this.registration,
+      error: error ?? this.error,
+    );
+  }
+
   @override
   List<Object?> get props => [status, registration, error];
 }

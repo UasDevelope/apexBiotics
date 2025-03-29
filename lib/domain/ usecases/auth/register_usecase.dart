@@ -1,11 +1,12 @@
 import 'package:apexbiotics/domain/repositories/auth_repository.dart';
+import 'package:apexbiotics/domain/entities/auth/registration_entity.dart';
 
 class RegisterUseCase {
   final AuthRepository repository;
 
   RegisterUseCase(this.repository);
 
-  Future<void> call({
+  Future<RegistrationEntity> call({
     required String name,
     required String email,
     required String password,

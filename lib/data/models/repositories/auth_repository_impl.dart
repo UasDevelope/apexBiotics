@@ -1,7 +1,9 @@
 import '../../../ core/errors/exceptions.dart';
+import '../../../ core/network/network_info.dart';
 import '../../../domain/entities/auth/registration_entity.dart';
 import '../../../domain/repositories/auth_repository.dart';
 import '../../datasources/remote/auth_api.dart';
+import '../auth/registration_request.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthApi authApi;
